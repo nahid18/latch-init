@@ -11,8 +11,18 @@ from latch.types import LatchFile, LatchDir
 
 @small_task
 def snp_sites_task(aln: LatchFile) -> LatchFile:
-    sam_file = Path("covid_assembly.sam").resolve()
-    return LatchFile(str(sam_file), "latch:///covid_assembly.sam")
+    log_file = Path(f"/root/snp_sites_log.txt")
+    output_dir = Path(f"/root/SNPsitesRun/")
+
+    _snp_cmd = [
+            "snp-sites", 
+            "-V", 
+        ]
+
+    with open(log_file, "w") as f:
+            subprocess.run(_snp_cmd, stdout=f, stderr=f)
+
+    return LatchFile(str(log_file), f"latch://{log_file}")
 
 
 @workflow

@@ -10,13 +10,13 @@ from latch.types import LatchFile, LatchDir
 
 
 @small_task
-def snp_sites_task(aln: LatchFile) -> LatchDir:
+def snp_sites_task(aln: LatchFile) -> LatchFile:
     sam_file = Path("covid_assembly.sam").resolve()
     return LatchFile(str(sam_file), "latch:///covid_assembly.sam")
 
 
 @workflow
-def snp_sites(aln: LatchFile) -> LatchDir:
+def snp_sites(aln: LatchFile) -> LatchFile:
     """Rapid efficient extraction of SNPs from multi-FASTA alignments
 
     SNP-sites

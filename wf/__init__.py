@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 
 from latch import small_task, workflow
-from latch.types import LatchFile
+from latch.types import LatchFile, LatchDir
 
 
 @small_task

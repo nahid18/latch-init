@@ -1,0 +1,1 @@
+## Latch init minimal scaffold

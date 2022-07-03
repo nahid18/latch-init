@@ -10,7 +10,11 @@ from latch.types import LatchFile, LatchDir
 
 
 @small_task
-def snp_sites_task(aln: LatchFile) -> LatchFile:
+def snp_sites_task(
+    aln: LatchFile,
+    is_m: bool = True,
+    is_r: bool = False
+) -> LatchFile:
     log_file = Path(f"/root/snp_sites_log.txt")
     output_dir = Path(f"/root/SNPsitesRun/")
 
@@ -26,7 +30,11 @@ def snp_sites_task(aln: LatchFile) -> LatchFile:
 
 
 @workflow
-def snp_sites(aln: LatchFile) -> LatchFile:
+def snp_sites(
+    aln: LatchFile, 
+    is_m: bool = True,
+    is_r: bool = False
+) -> LatchFile:
     """Rapid efficient extraction of SNPs from multi-FASTA alignments
 
     SNP-sites
@@ -50,15 +58,24 @@ def snp_sites(aln: LatchFile) -> LatchFile:
             github:
         repository:
         license:
-            id: GPLv3
+            id: MIT
 
     Args:
 
         aln:
           Alignment file in FASTA format
-
           __metadata__:
-            display_name: aln
+            display_name: Alignment File
+
+        is_m:
+          Generate a multi fasta alignment file output
+          __metadata__:
+            display_name: Output a multi fasta alignment file
+
+        is_r:
+          Generate internal pseudo reference sequence output
+          __metadata__:
+            display_name: Output internal pseudo reference sequence
 
     """
-    return snp_sites_task(aln=aln)
+    return snp_sites_task(aln=aln, is_m=is_m, is_r=is_r)

@@ -13,7 +13,9 @@ from latch.types import LatchFile, LatchDir
 def snp_sites_task(
     aln: LatchFile,
     is_m: bool = True,
-    is_r: bool = False
+    is_r: bool = False,
+    is_v: bool = False,
+    is_p: bool = False
 ) -> LatchFile:
     log_file = Path(f"/root/snp_sites_log.txt")
     output_dir = Path(f"/root/SNPsitesRun/")
@@ -33,7 +35,9 @@ def snp_sites_task(
 def snp_sites(
     aln: LatchFile, 
     is_m: bool = True,
-    is_r: bool = False
+    is_r: bool = False,
+    is_v: bool = False,
+    is_p: bool = False
 ) -> LatchFile:
     """Rapid efficient extraction of SNPs from multi-FASTA alignments
 
@@ -76,6 +80,22 @@ def snp_sites(
           Generate internal pseudo reference sequence output
           __metadata__:
             display_name: Output internal pseudo reference sequence
+        
+        is_v:
+          Generate a VCF file output
+          __metadata__:
+            display_name: Output a VCF file
+
+        is_p:
+          Generate a VCF file output
+          __metadata__:
+            display_name: Output a VCF file
+        
 
     """
-    return snp_sites_task(aln=aln, is_m=is_m, is_r=is_r)
+    return snp_sites_task(
+        aln=aln, 
+        is_m=is_m, 
+        is_r=is_r, 
+        is_v=is_v, 
+        is_p=is_p)
